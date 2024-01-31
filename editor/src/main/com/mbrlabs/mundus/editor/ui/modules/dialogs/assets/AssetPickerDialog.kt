@@ -34,9 +34,9 @@ import com.mbrlabs.mundus.editor.ui.modules.dialogs.BaseDialog
 import com.mbrlabs.mundus.editor.ui.widgets.AutoFocusListView
 
 /**
- * A filterable list of materials.
+ * A filterable list of assets.
  *
- * The user can pick one or no asset. The list of materials can be filtered by type before
+ * The user can pick one or no asset. The list of assets can be filtered by type before
  * showing it to the user.
  *
  * @author Marcus Brummer

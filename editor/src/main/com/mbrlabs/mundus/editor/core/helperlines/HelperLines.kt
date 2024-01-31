@@ -24,12 +24,14 @@ import com.badlogic.gdx.utils.Disposable
 import com.mbrlabs.mundus.commons.scene3d.components.Component
 import com.mbrlabs.mundus.editor.events.GameObjectModifiedEvent
 import com.mbrlabs.mundus.editor.events.TerrainAddedEvent
+import com.mbrlabs.mundus.editor.events.TerrainNewNeighborEvent
 import com.mbrlabs.mundus.editor.events.TerrainRemovedEvent
 import com.mbrlabs.mundus.editor.events.TerrainVerticesChangedEvent
 
 class HelperLines : TerrainVerticesChangedEvent.TerrainVerticesChangedEventListener,
         TerrainAddedEvent.TerrainAddedEventListener,
         TerrainRemovedEvent.TerrainRemovedEventListener,
+        TerrainNewNeighborEvent.TerrainNewNeighborEventListener,
         GameObjectModifiedEvent.GameObjectModifiedListener,
         Disposable {
 
@@ -79,10 +81,13 @@ class HelperLines : TerrainVerticesChangedEvent.TerrainVerticesChangedEventListe
     }
 
     override fun onTerrainRemoved(event: TerrainRemovedEvent) {
-        helperLineShapes.filter { it.terrainComponent == event.terrainComponent }.forEach {
-            it.dispose()
-            helperLineShapes.removeValue(it, true)
-        }
+        removeHelperLine(event.terrainComponent)
+    }
+
+    override fun onNewTerrainNeighbor(event: TerrainNewNeighborEvent) {
+        val terrainComponent = event.terrainComponent
+        removeHelperLine(terrainComponent)
+        addNewHelperLineShape(terrainComponent)
     }
 
     override fun onGameObjectModified(event: GameObjectModifiedEvent) {
@@ -105,6 +110,13 @@ class HelperLines : TerrainVerticesChangedEvent.TerrainVerticesChangedEventListe
         helperLineShapes.forEach { helperLineObject -> helperLineObject.dispose() }
         helperLineShapes.clear()
         type = null
+    }
+
+    private fun removeHelperLine(terrainComponent: TerrainComponent) {
+        helperLineShapes.filter { it.terrainComponent == terrainComponent }.forEach {
+            it.dispose()
+            helperLineShapes.removeValue(it, true)
+        }
     }
 
     private fun addNewHelperLineShape(terrainComponent: TerrainComponent) {

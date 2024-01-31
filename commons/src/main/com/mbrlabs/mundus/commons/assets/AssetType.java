@@ -16,8 +16,6 @@
 
 package com.mbrlabs.mundus.commons.assets;
 
-import com.mbrlabs.mundus.commons.shadows.ShadowResolution;
-
 /**
  * @author Marcus Brummer
  * @version 01-10-2016
@@ -36,7 +34,9 @@ public enum AssetType {
     /** Water file. Contains data for water. */
     WATER("Water"),
     /** Skybox file. Holds reference to skybox textures. **/
-    SKYBOX("Skybox");
+    SKYBOX("Skybox"),
+    /** Holds the terrain textures to be used. **/
+    TERRAIN_LAYER("Terrain Layer");
 
     private final String value;
 

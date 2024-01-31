@@ -57,10 +57,10 @@ class ToolManager(private val inputManager: InputManager,
 
     init {
         terrainBrushes = Array()
-        terrainBrushes.add(SmoothCircleBrush(projectManager, history))
-        terrainBrushes.add(CircleBrush(projectManager, history))
-        terrainBrushes.add(StarBrush(projectManager, history))
-        terrainBrushes.add(ConfettiBrush(projectManager, history))
+        terrainBrushes.add(SmoothCircleBrush(projectManager, history, goPicker))
+        terrainBrushes.add(CircleBrush(projectManager, history, goPicker))
+        terrainBrushes.add(StarBrush(projectManager, history, goPicker))
+        terrainBrushes.add(ConfettiBrush(projectManager, history, goPicker))
         modelPlacementTool = ModelPlacementTool(projectManager, history)
         selectionTool = SelectionTool(projectManager, goPicker, history, globalPreferencesManager)
         translateTool = TranslateTool(projectManager, goPicker, toolHandlePicker, history, globalPreferencesManager)

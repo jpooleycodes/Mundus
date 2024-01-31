@@ -29,7 +29,7 @@ import com.mbrlabs.mundus.editor.utils.formatFloat
  * @author Marcus Brummer
  * @version 04-02-2016
  */
-class ImprovedSlider(min: Float, max: Float, step: Float) : VisTable() {
+class ImprovedSlider(min: Float, max: Float, step: Float, digits: Int = 2) : VisTable() {
 
     private val currentValue = VisLabel("0")
     private val slider = ScrollPaneSlider(min, max, step, false)
@@ -39,8 +39,8 @@ class ImprovedSlider(min: Float, max: Float, step: Float) : VisTable() {
         add(currentValue).padLeft(10f).right()
 
         slider.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                currentValue.setText(String.format(formatFloat(slider.value, 2)))
+            override fun changed(event: ChangeEvent, actor: Actor) {
+                currentValue.setText(String.format(formatFloat(slider.value, digits)))
             }
         })
     }

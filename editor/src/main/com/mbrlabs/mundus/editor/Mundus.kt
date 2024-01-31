@@ -87,6 +87,7 @@ object Mundus {
     private val json: Json
     private val globalPrefManager: MundusPreferencesManager
     private val glProfiler: MundusGLProfiler
+    private val levelOfDetailScheduler: LevelOfDetailScheduler
 
     init {
         FileChooser.setDefaultPrefsName("mundus.editor.filechooser")
@@ -122,6 +123,7 @@ object Mundus {
         shortcutController = ShortcutController(registry, projectManager, commandHistory, toolManager, debugRenderer, globalPrefManager)
         json = Json()
         glProfiler = MundusGLProfiler(Gdx.graphics)
+        levelOfDetailScheduler = LevelOfDetailScheduler()
 
         val ioManagerProvider = IOManagerProvider(ioManager)
 
@@ -144,6 +146,7 @@ object Mundus {
             bindSingleton(json)
             bindSingleton(globalPrefManager)
             bindSingleton(glProfiler)
+            bindSingleton(levelOfDetailScheduler)
 
             bindSingleton(MetaSaver())
             bindSingleton(MetaLoader())
@@ -233,6 +236,13 @@ object Mundus {
         eventBus.unregister(listener)
     }
 
+    /*
+     * Gets the CommandHistory instance
+     */
+    fun getCommandHistory(): CommandHistory {
+        return commandHistory
+    }
+
     /**
      * Disposes everything.
      */
@@ -245,6 +255,7 @@ object Mundus {
         goPicker.dispose()
         handlePicker.dispose()
         glProfiler.disable()
+        levelOfDetailScheduler.dispose()
     }
 
 }

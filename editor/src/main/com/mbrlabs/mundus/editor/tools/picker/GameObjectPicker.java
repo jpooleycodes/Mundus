@@ -37,6 +37,23 @@ import com.mbrlabs.mundus.editor.scene3d.components.PickableComponent;
  */
 public class GameObjectPicker extends BasePicker {
 
+    /**
+     * Filter to ignore certain components when picking.
+     */
+    public interface ComponentIgnoreFilter {
+        /**
+         * Whether to ignore the given component or not.
+         * @param component component to check
+         * @return true if component should be ignored
+         */
+        boolean ignore(Component component);
+    }
+
+    /**
+     * Optional filter which can be used to ignore certain components when picking.
+     */
+    public ComponentIgnoreFilter ignoreFilter;
+
     public GameObjectPicker() {
         super();
     }
@@ -68,26 +85,39 @@ public class GameObjectPicker extends BasePicker {
 
     private void renderPickableScene(SceneGraph sceneGraph) {
         sceneGraph.scene.batch.begin(sceneGraph.scene.cam);
-        for (GameObject go : sceneGraph.getGameObjects()) {
-            if (!go.active) continue;
-            renderPickableGameObject(go);
-        }
+        renderPickableGameObject(sceneGraph.getRoot());
         sceneGraph.scene.batch.end();
     }
 
     private void renderPickableGameObject(GameObject go) {
         for (Component c : go.getComponents()) {
             if (c instanceof PickableComponent) {
+                if (ignoreFilter != null && ignoreFilter.ignore(c)) continue;
                 ((PickableComponent) c).renderPick();
             }
         }
 
         if (go.getChildren() != null) {
-            for (GameObject goc : go.getChildren()) {
-                if (!go.active) continue;
-                renderPickableGameObject(goc);
+            for (GameObject child : go.getChildren()) {
+                if (!child.active) continue;
+                renderPickableGameObject(child);
             }
         }
+    }
+
+    /**
+     * Sets a filter which can be used to ignore certain components when rendering for picking.
+     * @param filter the filter to set
+     */
+    public void setIgnoreFilter(ComponentIgnoreFilter filter) {
+        this.ignoreFilter = filter;
+    }
+
+    /**
+     * Clears the ignore filter.
+     */
+    public void clearIgnoreFilter() {
+        this.ignoreFilter = null;
     }
 
 }

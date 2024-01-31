@@ -35,9 +35,7 @@ public class Meta {
     public static final String JSON_UUID = "id";
     public static final String JSON_TYPE = "t";
     public static final String JSON_TERRAIN = "ter";
-    public static final String JSON_WATER = "wat";
     public static final String JSON_MODEL = "mdl";
-    public static final String JSON_SKY_BOX = "sky";
 
     private int version;
     private long lastModified;

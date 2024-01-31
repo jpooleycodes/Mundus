@@ -276,6 +276,7 @@ class MundusToolbar(private val outline: Outline) : Toolbar(),
     }
 
     override fun onGameObjectSelected(event: GameObjectSelectedEvent) {
+        if (!event.activateSelection) return
         if (toolManager.activeTool !is SelectionTool) {
             toolManager.activateTool(toolManager.translateTool)
         }

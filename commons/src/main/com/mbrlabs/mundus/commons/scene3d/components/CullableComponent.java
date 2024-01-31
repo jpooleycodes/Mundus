@@ -30,8 +30,7 @@ import com.mbrlabs.mundus.commons.scene3d.GameObject;
 import com.mbrlabs.mundus.commons.scene3d.ModelCacheable;
 import com.mbrlabs.mundus.commons.scene3d.ModelEventable;
 import com.mbrlabs.mundus.commons.shadows.MundusDirectionalShadowLight;
-
-import static com.mbrlabs.mundus.commons.utils.ModelUtils.isVisible;
+import com.mbrlabs.mundus.commons.utils.ModelUtils;
 
 /**
  * Components that can be Culled via Frustum Culling should extend
@@ -97,13 +96,13 @@ public abstract class CullableComponent extends AbstractComponent implements Mod
 
         Camera sceneCam = gameObject.sceneGraph.scene.cam;
 
-        visibleToPerspective = isVisible(sceneCam, modelInstance, center, radius);
+        visibleToPerspective = ModelUtils.isVisible(sceneCam, orientedBoundingBox);
 
         // If not visible to main cam, check if it's visible to shadow map (to prevent shadows popping out)
         if (!visibleToPerspective) {
             if (gameObject.sceneGraph.scene.environment.shadowMap instanceof MundusDirectionalShadowLight) {
                 MundusDirectionalShadowLight shadowLight = (MundusDirectionalShadowLight) gameObject.sceneGraph.scene.environment.shadowMap;
-                visibleToShadowMap = isVisible(shadowLight.getCamera(), modelInstance, center, radius);
+                visibleToShadowMap = ModelUtils.isVisible(shadowLight.getCamera(), orientedBoundingBox);
             }
         }
 
@@ -149,6 +148,15 @@ public abstract class CullableComponent extends AbstractComponent implements Mod
         dimensions.scl(tmpScale);
         radius = dimensions.len() / 2f;
         orientedBoundingBox.set(tmpBounds, modelInstance.transform);
+    }
+
+    /**
+     * Updates the dimensions of the cullable component.
+     * This should be called only when necessary, as it is a relatively expensive operation.
+     */
+    public void updateDimensions() {
+        if (modelInstance == null) return;
+        setDimensions(modelInstance);
     }
 
     public OrientedBoundingBox getOrientedBoundingBox() {

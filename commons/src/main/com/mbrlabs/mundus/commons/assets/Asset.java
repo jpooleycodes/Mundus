@@ -103,4 +103,17 @@ public abstract class Asset implements Disposable, AssetUsage {
      */
     public abstract void applyDependencies();
 
+    /**
+     * Returns the loading priority of this asset. Some assets need to be loaded
+     * before others, e.g. a material asset needs to be loaded before a Model
+     *
+     * @return the loading priority of this asset
+     */
+    public int getLoadingPriority() {
+        if (this instanceof MaterialAsset || this instanceof TerrainLayerAsset) {
+            return 1;
+        }
+        return 2;
+    }
+
 }

@@ -87,7 +87,7 @@ class AddComponentDialog : BaseDialog("Add Component") {
     }
 
     /**
-     * Retrieve a new component for the given type. Only Light components are supported right now.
+     * Retrieve a new component for the given type.
      */
     private fun getNewComponent(type: Component.Type, go: GameObject): Component? {
         when(type) {
@@ -97,6 +97,7 @@ class AddComponentDialog : BaseDialog("Add Component") {
             Component.Type.PARTICLE_SYSTEM -> TODO()
             Component.Type.WATER -> TODO()
             Component.Type.CUSTOM_PROPERTIES -> return getNewCustomPropertiesComponent(go)
+            Component.Type.TERRAIN_MANAGER -> TODO()
         }
     }
 
@@ -120,7 +121,7 @@ class AddComponentDialog : BaseDialog("Add Component") {
         }
     }
 
-    private fun getNewCustomPropertiesComponent(go: GameObject): Component? {
+    private fun getNewCustomPropertiesComponent(go: GameObject): Component {
         return CustomPropertiesComponent(go)
     }
 

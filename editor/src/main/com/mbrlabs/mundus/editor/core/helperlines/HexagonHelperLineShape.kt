@@ -132,11 +132,21 @@ class HexagonHelperLineShape(width: Int,
     }
 
     private fun calculate(width: Int, vertexResolution: Int, method: (pos: Short) -> Unit) {
-        var patternY = 0
+        val bottomTerrainChunksVertexResolution = calculateBottomTerrainChunksVertexResolution()
+        val rightTerrainChunksVertexResolution = calculateRightTerrainChunksVertexResolution()
 
-        for (y in 0 until vertexResolution + width step width) {
-            var patternX = 0
-            for (x in 0 until vertexResolution step width) {
+        val yUsedWidth = bottomTerrainChunksVertexResolution % width
+        val xUsedWidth = rightTerrainChunksVertexResolution % width
+
+        val yInit = if (yUsedWidth == 0) 0 else -yUsedWidth
+        val xInit = if (xUsedWidth == 0) 0 else -xUsedWidth
+
+        var patternY = ((bottomTerrainChunksVertexResolution - yUsedWidth) / width) % PATTERN.size
+
+        for (y in yInit until vertexResolution + width step width) {
+            var patternX = ((rightTerrainChunksVertexResolution - xUsedWidth) / width) % PATTERN.get(patternY).size
+
+            for (x in xInit until vertexResolution step width) {
                 val mainCurrent = y * vertexResolution + x
 
                 for (pattern in PATTERN.get(patternY).get(patternX)) {
@@ -144,15 +154,18 @@ class HexagonHelperLineShape(width: Int,
                     for (w in 0 until  width) {
                         val next = getNext(current, pattern, vertexResolution)
 
-                        if (isOnMap(current, vertexResolution) && isOk(current, next, vertexResolution, pattern) && isOnMap(next, vertexResolution)) {
-                            method.invoke(current.toShort())
-                            method.invoke(next.toShort())
-                        } else if (!isOk(current, next, vertexResolution, pattern)) {
+                        if (current >= 0 && next >= 0 && x + w >= 0) {
+                            if (isOnMap(current, vertexResolution) && isOk(current, next, vertexResolution, pattern) && isOnMap(next, vertexResolution)) {
+                                method.invoke(current.toShort())
+                                method.invoke(next.toShort())
+                            } else if (!isOk(current, next, vertexResolution, pattern)) {
+                                break
+                            }
+                        } else if (current == -1 && next == 0) {
                             break
                         }
 
                         current = next
-
                     }
                 }
 
@@ -184,5 +197,5 @@ class HexagonHelperLineShape(width: Int,
         }
     }
 
-    private fun getRow(cell: Int, vertexResolution: Int) = cell / vertexResolution
+    private fun getRow(cell: Int, vertexResolution: Int) = cell / vertexResolution + if (cell < 0) -1 else 0
 }

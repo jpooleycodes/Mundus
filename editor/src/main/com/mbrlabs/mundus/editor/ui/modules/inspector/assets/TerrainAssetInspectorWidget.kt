@@ -29,6 +29,7 @@ import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.events.SceneGraphChangedEvent
 import com.mbrlabs.mundus.editor.scene3d.components.PickableTerrainComponent
 import com.mbrlabs.mundus.editor.ui.modules.inspector.BaseInspectorWidget
+import com.mbrlabs.mundus.editor.ui.widgets.LevelOfDetailWidget
 
 /**
  * @author Marcus Brummer
@@ -47,6 +48,7 @@ class TerrainAssetInspectorWidget : BaseInspectorWidget(TITLE) {
     private val vertexCount = VisLabel()
     private val indexCount = VisLabel()
     private val splatMapSize = VisLabel()
+    private val lodWidget = LevelOfDetailWidget()
 
     // actions
     private val terrainPlacement = VisTextButton("Add Terrain to Scene")
@@ -56,6 +58,7 @@ class TerrainAssetInspectorWidget : BaseInspectorWidget(TITLE) {
         collapsibleContent.add(vertexCount).growX().row()
         collapsibleContent.add(indexCount).growX().row()
         collapsibleContent.add(splatMapSize).growX().row()
+        collapsibleContent.add(lodWidget).padTop(5f).growX().row()
 
         // actions
         collapsibleContent.add(VisLabel("Actions")).padTop(5f).growX().row()
@@ -100,6 +103,7 @@ class TerrainAssetInspectorWidget : BaseInspectorWidget(TITLE) {
         vertexCount.setText("Vertices: " + ModelUtils.getVerticesCount(model))
         indexCount.setText("Indices: " + ModelUtils.getIndicesCount(model))
         splatMapSize.setText("SplatMap Resolution: " + terrainAsset!!.meta.terrain.splatMapResolution)
+        lodWidget.setLodLevels(terrainAsset!!.lodLevels)
     }
 
     override fun onDelete() {

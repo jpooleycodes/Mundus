@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.OrientedBoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.mbrlabs.mundus.commons.scene3d.GameObject;
@@ -91,6 +92,13 @@ public class ModelUtils {
         for (GameObject go : rootGameObject.getChildren()) {
             applyGameObjectMaterials(go);
         }
+    }
+
+    /**
+     * Checks if visible to camera using OrientedBoundingBox
+     */
+    public static boolean isVisible(final Camera cam, OrientedBoundingBox box) {
+        return cam.frustum.boundsInFrustum(box);
     }
 
     /**

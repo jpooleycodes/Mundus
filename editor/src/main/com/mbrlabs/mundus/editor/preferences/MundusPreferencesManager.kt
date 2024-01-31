@@ -16,6 +16,7 @@ class MundusPreferencesManager(preferencesKey: String) : PreferencesManager {
         /** Keys for global prefs **/
         const val GLOB_MUNDUS_VERSION = "version"
         const val GLOB_RIGHT_BUTTON_SELECT = "right-button-select"
+        const val GLOB_OPTIMIZE_TERRAIN_UPDATES = "optimize-terrain-updates"
         const val GLOB_LINE_WIDTH_SELECTION = "line-width-selection"
         const val GLOB_LINE_WIDTH_WIREFRAME = "line-width-wireframe"
         const val GLOB_LINE_WIDTH_HELPER_LINE = "line-width-helper-line"

@@ -34,12 +34,14 @@ class ToolsMenu : Menu("Tools") {
 
     private val findUnusedAssets = MenuItem("Asset Clean Up")
     private val debugRendering = MenuItem("Debug Render Options")
+    private val fixTerrainSeams = MenuItem("Fix Terrain Seams")
 
     val projectManager: ProjectManager = Mundus.inject()
 
     init {
         addItem(findUnusedAssets)
         addItem(debugRendering)
+        addItem(fixTerrainSeams)
 
         findUnusedAssets.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
@@ -57,6 +59,12 @@ class ToolsMenu : Menu("Tools") {
         debugRendering.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
                 UI.showDialog(UI.debugRenderDialog)
+            }
+        })
+
+        fixTerrainSeams.addListener(object : ClickListener() {
+            override fun clicked(event: InputEvent?, x: Float, y: Float) {
+                UI.showDialog(UI.terrainStitcherDialog)
             }
         })
     }

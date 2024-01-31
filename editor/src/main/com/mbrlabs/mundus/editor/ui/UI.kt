@@ -37,6 +37,7 @@ import com.mbrlabs.mundus.editor.ui.modules.outline.Outline
 import com.mbrlabs.mundus.editor.ui.modules.StatusBar
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.*
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.assets.AssetPickerDialog
+import com.mbrlabs.mundus.editor.ui.modules.dialogs.gameobjects.GameObjectPickerDialog
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.importer.ImportModelDialog
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.importer.ImportTextureDialog
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.settings.SettingsDialog
@@ -68,6 +69,7 @@ object UI : Stage(ScreenViewport()) {
     val toaster: Toaster = Toaster(this)
     val fileChooser: FileChooser = PersistingFileChooser(FileChooser.Mode.OPEN)
     val assetSelectionDialog: AssetPickerDialog = AssetPickerDialog()
+    val gameObjectSelectionDialog: GameObjectPickerDialog = GameObjectPickerDialog()
 
     // base elements
     private val root: VisTable
@@ -92,14 +94,17 @@ object UI : Stage(ScreenViewport()) {
     val fogDialog: FogDialog = FogDialog()
     val skyboxDialog: SkyboxDialog = SkyboxDialog()
     val ambientLightDialog: AmbientLightDialog = AmbientLightDialog()
-    var directionalLightDialog: DirectionalLightsDialog = DirectionalLightsDialog()
-    var shadowSettingsDialog: ShadowSettingsDialog = ShadowSettingsDialog()
-    var addComponentDialog: AddComponentDialog = AddComponentDialog()
-    var addTerrainDialog: AddTerrainDialog = AddTerrainDialog()
+    val directionalLightDialog: DirectionalLightsDialog = DirectionalLightsDialog()
+    val shadowSettingsDialog: ShadowSettingsDialog = ShadowSettingsDialog()
+    val addComponentDialog: AddComponentDialog = AddComponentDialog()
     val addWaterDialog: AddWaterDialog = AddWaterDialog()
+    val addTerrainChunksDialog: AddTerrainChunksDialog = AddTerrainChunksDialog()
+    val terrainSystemGenerationDialog : TerrainSystemGenerationDialog = TerrainSystemGenerationDialog()
     val versionDialog: VersionDialog = VersionDialog()
     val keyboardShortcuts: KeyboardShortcutsDialog = KeyboardShortcutsDialog()
     val debugRenderDialog: DebugRenderDialog = DebugRenderDialog()
+    val terrainStitcherDialog: TerrainStitcherDialog = TerrainStitcherDialog()
+    val levelOfDetailDialog: LevelOfDetailDialog = LevelOfDetailDialog()
     val exitDialog: ExitDialog = ExitDialog()
 
     // styles

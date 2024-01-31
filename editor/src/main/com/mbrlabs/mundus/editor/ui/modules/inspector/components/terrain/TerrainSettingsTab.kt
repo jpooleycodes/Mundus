@@ -26,6 +26,7 @@ import com.kotcrab.vis.ui.widget.VisTable
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab
 import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
+import com.mbrlabs.mundus.editor.ui.widgets.TerrainNeighborWidget
 import com.mbrlabs.mundus.editor.ui.widgets.ToolTipLabel
 
 /**
@@ -36,6 +37,7 @@ class TerrainSettingsTab(private val parentWidget: TerrainComponentWidget) : Tab
 
     private val table = VisTable()
     private val triplanar = VisCheckBox(null)
+    private var neighborWidget: TerrainNeighborWidget? = null
 
     private val projectManager: ProjectManager = Mundus.inject()
 
@@ -56,6 +58,10 @@ class TerrainSettingsTab(private val parentWidget: TerrainComponentWidget) : Tab
                 parentWidget.component.terrainAsset.setTriplanar(triplanar.isChecked)
             }
         })
+
+        table.addSeparator()
+        neighborWidget = TerrainNeighborWidget(parentWidget.component)
+        table.add(neighborWidget).expand().fill().row()
     }
 
     override fun getTabTitle(): String {

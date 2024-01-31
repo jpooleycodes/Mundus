@@ -40,20 +40,24 @@ class UsedByAssetInspectorWidget  : BaseInspectorWidget(TITLE) {
 
         root.defaults().align(Align.left)
 
+        root.add(VisLabel("Used by Assets")).row()
+        root.addSeparator()
         if (usagesInAssets.isNotEmpty()) {
-            root.add(VisLabel("Used by Assets")).row()
-            root.addSeparator()
             for (assetUsage in usagesInAssets) {
                 root.add(assetUsage.name).row()
             }
+        } else {
+            root.add("None").row()
         }
 
+        root.add(VisLabel("Used in Scenes")).padTop(10f).row()
+        root.addSeparator()
         if (usagesInScenes.isNotEmpty()) {
-            root.add(VisLabel("Used in Scenes")).padTop(10f).row()
-            root.addSeparator()
             for (assetUsage in usagesInScenes) {
                 root.add(assetUsage.value + ": " + assetUsage.key.name).row()
             }
+        } else {
+            root.add("None").row()
         }
     }
 

@@ -112,7 +112,7 @@ public class SelectionTool extends Tool {
             GameObject selection = goPicker.pick(getProjectManager().current().currScene, screenX, screenY);
             if (selection != null && !selection.equals(getProjectManager().current().currScene.currentSelection)) {
                 gameObjectSelected(selection);
-                Mundus.INSTANCE.postEvent(new GameObjectSelectedEvent(selection));
+                Mundus.INSTANCE.postEvent(new GameObjectSelectedEvent(selection, true));
             }
         }
 

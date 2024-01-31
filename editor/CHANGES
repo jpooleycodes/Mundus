@@ -1,5 +1,6 @@
 [0.6.0] ~
 - [BREAKING CHANGE] Migrated from Kryo to JSON for .registry and .pro files. Migration handled automatically.
+- [BREAKING CHANGE] Old Projects must be reopened in Editor to generate Terrain Layers
 - Add dirty transform flag optimization for caching GameObject/SimpleNode world transform
 - Add OrientedBoundingBox to cullable components, update debug renderer to use it
 - Add "Align Camera to Object" and "Align Object to Camera" actions
@@ -22,6 +23,12 @@
 - Sort children action command in Outline
 - Fix add water and terrain as child
 - Thumbnail view for model asset in Asset Dock
+- Fix Terrain Cloning, now works as expected
+- Added optional ignore filter to GameObjectPicker
+- Added loading priorities for assets
+- Added new TerrainLayerAsset to decouple splat textures from terrains
+- Added PlaneMesh, decouples terrain mesh generation logic from terrain class
+- Updated Terrain getRayIntersection to use binary search
 
 [0.5.1] ~ 08/08/2023
 - Added FPS launcher argument, always call setForegroundFPS

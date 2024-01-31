@@ -16,12 +16,14 @@ import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.history.CommandHistory
 import com.mbrlabs.mundus.editor.history.commands.TerrainHeightCommand
-import com.mbrlabs.mundus.editor.terrain.Terraformer
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.widgets.FileChooserField
 import com.mbrlabs.mundus.editor.ui.widgets.FloatFieldWithLabel
 import com.mbrlabs.mundus.editor.utils.isImage
 
+/**
+ * @Deprecated
+ */
 class HeightmapTab(private val terrainComponent: TerrainComponent) : Tab(false, false) {
 
     private val root = VisTable()
@@ -82,7 +84,7 @@ class HeightmapTab(private val terrainComponent: TerrainComponent) : Tab(false, 
 
     private fun loadHeightMap(heightMap: FileHandle) {
         val terrain = terrainComponent.terrainAsset.terrain
-        val command = TerrainHeightCommand(terrain)
+        val command = TerrainHeightCommand(terrainComponent)
         command.setHeightDataBefore(terrain.heightData)
 
         val minMax = loadHeightMapMaxHeight.float
@@ -95,10 +97,10 @@ class HeightmapTab(private val terrainComponent: TerrainComponent) : Tab(false, 
             scaledPixmap.drawPixmap(originalMap, 0, 0, originalMap.width, originalMap.height, 0, 0,
                     scaledPixmap.width, scaledPixmap.height)
             originalMap.dispose()
-            Terraformer.heightMap(terrainComponent).maxHeight(minMax).map(scaledPixmap).terraform()
+            //Terraformer.heightMap(terrainComponent).maxHeight(minMax).map(scaledPixmap).terraform()
             scaledPixmap.dispose()
         } else {
-            Terraformer.heightMap(terrainComponent).maxHeight(minMax).map(originalMap).terraform()
+            //Terraformer.heightMap(terrainComponent).maxHeight(minMax).map(originalMap).terraform()
             originalMap.dispose()
         }
 

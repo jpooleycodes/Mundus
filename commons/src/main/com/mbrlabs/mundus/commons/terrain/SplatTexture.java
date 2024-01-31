@@ -46,4 +46,7 @@ public class SplatTexture implements TextureProvider {
         return null;
     }
 
+    public void setTexture(TextureAsset texture) {
+        this.texture = texture;
+    }
 }

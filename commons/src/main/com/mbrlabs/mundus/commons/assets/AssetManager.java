@@ -40,6 +40,7 @@ import net.mgsx.gltf.scene3d.scene.SceneAsset;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -267,12 +268,9 @@ public class AssetManager implements Disposable {
                 TerrainLoader.TerrainParameter terrainParameter = new TerrainLoader.TerrainParameter(m.getTerrain());
                 gdxAssetManager.load(filePath, Terrain.class, terrainParameter);
             case MATERIAL:
-                // loads synchronously
-                break;
-            case WATER:
-                // loads synchronously
-                break;
+            case TERRAIN_LAYER:
             case SKYBOX:
+            case WATER:
                 // loads synchronously
                 break;
         }
@@ -312,17 +310,16 @@ public class AssetManager implements Disposable {
             loadAsset(metaLoader.load(meta));
         }
 
-        // resolve material assets
-        for (Asset asset : assets) {
-            if (asset instanceof MaterialAsset) {
-                asset.resolveDependencies(assetIndex);
-                asset.applyDependencies();
+        // Sort assets by loading priority
+        assets.sort(new Comparator<Asset>() {
+            @Override
+            public int compare(Asset a1, Asset a2) {
+                return Integer.compare(a1.getLoadingPriority(), a2.getLoadingPriority());
             }
-        }
+        });
 
-        // resolve other assets
+        // resolve assets
         for (Asset asset : assets) {
-            if (asset instanceof MaterialAsset) continue;
             if (asset instanceof ModelAsset) {
                 int modelBones = asset.getMeta().getModel().getNumBones();
                 maxNumBones = Math.max(modelBones, maxNumBones);
@@ -384,6 +381,9 @@ public class AssetManager implements Disposable {
             case TERRAIN:
                 asset = loadTerrainAsset(meta, assetFile);
                 break;
+            case TERRAIN_LAYER:
+                asset = loadTerrainLayerAsset(meta, assetFile);
+                break;
             case MODEL:
                 asset = loadModelAsset(meta, assetFile);
                 break;
@@ -427,6 +427,12 @@ public class AssetManager implements Disposable {
 
     private TerrainAsset loadTerrainAsset(Meta meta, FileHandle assetFile) {
         TerrainAsset asset = new TerrainAsset(meta, assetFile);
+        asset.load(gdxAssetManager);
+        return asset;
+    }
+
+    private TerrainLayerAsset loadTerrainLayerAsset(Meta meta, FileHandle assetFile) {
+        TerrainLayerAsset asset = new TerrainLayerAsset(meta, assetFile);
         asset.load(gdxAssetManager);
         return asset;
     }

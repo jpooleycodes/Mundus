@@ -57,7 +57,7 @@ class PerlinNoiseTab(private val terrainComponent: TerrainComponent) : Tab(false
 
     private fun generatePerlinNoise(seed: Int, min: Float, max: Float) {
         val terrain = terrainComponent.terrainAsset.terrain
-        val command = TerrainHeightCommand(terrain)
+        val command = TerrainHeightCommand(terrainComponent)
         command.setHeightDataBefore(terrain.heightData)
 
         Terraformer.perlin(terrainComponent).minHeight(min).maxHeight(max).seed(seed.toLong()).terraform()

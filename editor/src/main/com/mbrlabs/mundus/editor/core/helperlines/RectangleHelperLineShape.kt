@@ -27,29 +27,40 @@ class RectangleHelperLineShape(width: Int,
                                terrainComponent: TerrainComponent) : HelperLineShape(width, counterOffsetX, counterOffsetY, terrainComponent) {
 
     override fun calculateIndicesNum(width: Int, terrain: Terrain): Int {
-        val vertexResolution = terrain.vertexResolution
-
-        return vertexResolution * 2 * ((vertexResolution / width) + 1) * 2
+        var i = 0
+        calculate(width, terrain.vertexResolution) { ++i }
+        return i
     }
 
     override fun fillIndices(width: Int, indices: ShortArray, vertexResolution: Int) {
-        var i = -1
-        for (y in 0 until vertexResolution step width) {
-            for (x in 0 until  vertexResolution - 1) {
-                val current = y * vertexResolution + x
-                val next = current + 1
+        var i = 0
+        calculate(width, vertexResolution) { pos -> indices[i++] = pos }
+    }
 
-                indices[++i] = current.toShort()
-                indices[++i] = next.toShort()
+    private fun calculate(width: Int, vertexResolution: Int, method: (pos: Short) -> Unit) {
+        val yInit = 0 - (calculateBottomTerrainChunksVertexResolution() % width)
+        val xInit = 0 - (calculateRightTerrainChunksVertexResolution() % width)
+
+        for (y in yInit until vertexResolution step width) {
+            if (y >= 0) {
+                for (x in 0 until vertexResolution - 1) {
+                    val current = y * vertexResolution + x
+                    val next = current + 1
+
+                    method.invoke(current.toShort())
+                    method.invoke(next.toShort())
+                }
             }
         }
-        for (y in 0 until vertexResolution step width) {
-            for (x in 0 until  vertexResolution - 1) {
-                val current = y + vertexResolution * x
-                val next = current + vertexResolution
+        for (y in xInit until vertexResolution step width) {
+            if (y >= 0) {
+                for (x in 0 until vertexResolution - 1) {
+                    val current = y + vertexResolution * x
+                    val next = current + vertexResolution
 
-                indices[++i] = current.toShort()
-                indices[++i] = next.toShort()
+                    method.invoke(current.toShort())
+                    method.invoke(next.toShort())
+                }
             }
         }
     }

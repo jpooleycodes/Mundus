@@ -22,10 +22,13 @@ import com.badlogic.gdx.graphics.g3d.RenderableProvider;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.Array;
 import com.mbrlabs.mundus.commons.assets.Asset;
 import com.mbrlabs.mundus.commons.assets.TerrainAsset;
+import com.mbrlabs.mundus.commons.assets.TerrainLayerAsset;
 import com.mbrlabs.mundus.commons.scene3d.GameObject;
+import com.mbrlabs.mundus.commons.lod.LevelOfDetailManager;
+import com.mbrlabs.mundus.commons.lod.TerrainLevelOfDetailManager;
 import net.mgsx.gltf.scene3d.attributes.PBRTextureAttribute;
 
 import java.util.Objects;
@@ -41,9 +44,24 @@ public class TerrainComponent extends CullableComponent implements AssetUsage, R
     protected ModelInstance modelInstance;
     protected TerrainAsset terrainAsset;
 
+    // Neighbor terrain components
+    private TerrainComponent topNeighbor;
+    private TerrainComponent rightNeighbor;
+    private TerrainComponent bottomNeighbor;
+    private TerrainComponent leftNeighbor;
+
+    private final LevelOfDetailManager lodManager;
+
     public TerrainComponent(GameObject go) {
         super(go);
         type = Component.Type.TERRAIN;
+        lodManager = new TerrainLevelOfDetailManager(this);
+    }
+
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+        lodManager.update(delta);
     }
 
     @Override
@@ -69,9 +87,12 @@ public class TerrainComponent extends CullableComponent implements AssetUsage, R
         Material material = modelInstance.materials.first();
 
         // Apply base textures to this instances material because we use base color/normal for splat base
-        material.set(PBRTextureAttribute.createBaseColorTexture(terrainAsset.getSplatBase().getTexture()));
-        if (terrainAsset.getSplatBaseNormal() != null)
-            material.set(PBRTextureAttribute.createNormalTexture(terrainAsset.getSplatBaseNormal().getTexture()));
+        final TerrainLayerAsset terrainLayerAsset = terrainAsset.getTerrainLayerAsset();
+        material.set(PBRTextureAttribute.createBaseColorTexture(terrainLayerAsset.getSplatBase().getTexture()));
+        if (terrainLayerAsset.getSplatBaseNormal() != null)
+            material.set(PBRTextureAttribute.createNormalTexture(terrainLayerAsset.getSplatBaseNormal().getTexture()));
+        else
+            material.remove(PBRTextureAttribute.NormalTexture);
 
         terrainAsset.getMaterialAsset().applyToMaterial(material, true);
     }
@@ -80,9 +101,62 @@ public class TerrainComponent extends CullableComponent implements AssetUsage, R
         return terrainAsset;
     }
 
+    public TerrainComponent getTopNeighbor() {
+        return topNeighbor;
+    }
+
+    public void setTopNeighbor(final TerrainComponent topNeighbor) {
+        this.topNeighbor = topNeighbor;
+    }
+
+    public TerrainComponent getRightNeighbor() {
+        return rightNeighbor;
+    }
+
+    public void setRightNeighbor(final TerrainComponent rightNeighbor) {
+        this.rightNeighbor = rightNeighbor;
+    }
+
+    public TerrainComponent getBottomNeighbor() {
+        return bottomNeighbor;
+    }
+
+    public void setBottomNeighbor(final TerrainComponent bottomNeighbor) {
+        this.bottomNeighbor = bottomNeighbor;
+    }
+
+    public TerrainComponent getLeftNeighbor() {
+        return leftNeighbor;
+    }
+
+    public void setLeftNeighbor(final TerrainComponent leftNeighbor) {
+        this.leftNeighbor = leftNeighbor;
+    }
+
+    /**
+     * Retrieves immediate neighbors of this terrain (TOP, RIGHT, BOTTOM, LEFT).
+     * If a neighbor is null, it is not added to the array.
+     *
+     * @param out array to store neighbors in
+     * @return array with neighbors
+     */
+    public Array<TerrainComponent> getNeighbors(Array<TerrainComponent> out) {
+        if (topNeighbor != null) out.add(topNeighbor);
+        if (rightNeighbor != null) out.add(rightNeighbor);
+        if (bottomNeighbor != null) out.add(bottomNeighbor);
+        if (leftNeighbor != null) out.add(leftNeighbor);
+        return out;
+    }
+
+    public LevelOfDetailManager getLodManager() {
+        return lodManager;
+    }
+
     @Override
     public Component clone(GameObject go) {
-        throw new GdxRuntimeException("Duplicating terrains is not supported.");
+        TerrainComponent terrainComponent = new TerrainComponent(go);
+        terrainComponent.setTerrainAsset(terrainAsset);
+        return terrainComponent;
     }
 
     @Override
@@ -137,7 +211,8 @@ public class TerrainComponent extends CullableComponent implements AssetUsage, R
      * @return The out Vector3 which contains the intersect point.
      */
     public Vector3 getRayIntersection(Vector3 out, Ray ray) {
-        return terrainAsset.getTerrain().getRayIntersection(out, ray, modelInstance.transform);
+        terrainAsset.getTerrain().getRayIntersection(out, ray, modelInstance.transform);
+        return out;
     }
 
     /**

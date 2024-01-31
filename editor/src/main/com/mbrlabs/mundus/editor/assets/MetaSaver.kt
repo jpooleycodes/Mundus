@@ -79,17 +79,8 @@ class MetaSaver {
         json.writeValue(MetaTerrain.JSON_TRIPLANAR, terrain.isTriplanar)
         json.writeValue(MetaTerrain.JSON_SPLAT_BASE64, terrain.splatBase64)
         json.writeValue(MetaTerrain.JSON_MATERIAL, terrain.materialId)
+        json.writeValue(MetaTerrain.JSON_LAYER, terrain.terrainLayerAssetId)
         if (terrain.splatmap != null) json.writeValue(MetaTerrain.JSON_SPLATMAP, terrain.splatmap)
-        if (terrain.splatBase != null) json.writeValue(MetaTerrain.JSON_SPLAT_BASE, terrain.splatBase)
-        if (terrain.splatR != null) json.writeValue(MetaTerrain.JSON_SPLAT_R, terrain.splatR)
-        if (terrain.splatG != null) json.writeValue(MetaTerrain.JSON_SPLAT_G, terrain.splatG)
-        if (terrain.splatB != null) json.writeValue(MetaTerrain.JSON_SPLAT_B, terrain.splatB)
-        if (terrain.splatA != null) json.writeValue(MetaTerrain.JSON_SPLAT_A, terrain.splatA)
-        if (terrain.splatBaseNormal != null) json.writeValue(MetaTerrain.JSON_SPLAT_BASE_NORMAL, terrain.splatBaseNormal)
-        if (terrain.splatRNormal != null) json.writeValue(MetaTerrain.JSON_SPLAT_R_NORMAL, terrain.splatRNormal)
-        if (terrain.splatGNormal != null) json.writeValue(MetaTerrain.JSON_SPLAT_G_NORMAL, terrain.splatGNormal)
-        if (terrain.splatBNormal != null) json.writeValue(MetaTerrain.JSON_SPLAT_B_NORMAL, terrain.splatBNormal)
-        if (terrain.splatANormal != null) json.writeValue(MetaTerrain.JSON_SPLAT_A_NORMAL, terrain.splatANormal)
         json.writeObjectEnd()
     }
 

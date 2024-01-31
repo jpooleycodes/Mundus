@@ -49,14 +49,15 @@ public class TerrainMaterial extends TerrainAttributes {
     }
 
     public void removeTexture(SplatTexture.Channel channel) {
-        if (splatmap != null) {
-            textures.remove(channel);
-            splatmap.clearChannel(channel);
-            splatmap.updateTexture();
+        if (splatmap == null) return;
+        if (!textures.containsKey(channel)) return;
 
-            if (has(getTerrainAttribute(channel, false))) {
-                remove(getTerrainAttribute(channel, false));
-            }
+        textures.remove(channel);
+        splatmap.clearChannel(channel);
+        splatmap.updateTexture();
+
+        if (has(getTerrainAttribute(channel, false))) {
+            remove(getTerrainAttribute(channel, false));
         }
     }
 
@@ -69,7 +70,10 @@ public class TerrainMaterial extends TerrainAttributes {
 
     public void setSplatTexture(SplatTexture tex) {
         textures.put(tex.channel, tex);
-        set(new TerrainAttribute(getTerrainAttribute(tex.channel, false)));
+        TerrainAttribute attr = (TerrainAttribute) get(getTerrainAttribute(tex.channel, false));
+        if (attr == null) {
+            set(new TerrainAttribute(getTerrainAttribute(tex.channel, false)));
+        }
     }
 
     public void setSplatNormalTexture(SplatTexture tex) {
@@ -155,6 +159,10 @@ public class TerrainMaterial extends TerrainAttributes {
 
     public Map<SplatTexture.Channel, SplatTexture> getTextures() {
         return textures;
+    }
+
+    public Map<SplatTexture.Channel, SplatTexture> getNormalTextures() {
+        return normalTextures;
     }
 
     public SplatMap getSplatmap() {

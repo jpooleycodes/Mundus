@@ -59,6 +59,20 @@ public class SceneGraph {
         return root.getChildren();
     }
 
+    public void getAllGameObjects(Array<GameObject> out) {
+        getAllChildGameObjects(root, out);
+    }
+
+    public void getAllChildGameObjects(GameObject gameObject, Array<GameObject> out) {
+        if (out == null) throw new IllegalArgumentException("out array cannot be null.");
+        out.add(gameObject);
+
+        if (gameObject.getChildren() == null) return;
+        for (GameObject go : gameObject.getChildren()) {
+            getAllChildGameObjects(go, out);
+        }
+    }
+
     public void addGameObject(GameObject go) {
         addGameObject(root, go);
     }

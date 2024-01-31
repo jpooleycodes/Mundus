@@ -24,6 +24,7 @@ import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.ui.modules.inspector.assets.MaterialAssetInspectorWidget
 import com.mbrlabs.mundus.editor.ui.modules.inspector.assets.ModelAssetInspectorWidget
 import com.mbrlabs.mundus.editor.ui.modules.inspector.assets.TerrainAssetInspectorWidget
+import com.mbrlabs.mundus.editor.ui.modules.inspector.assets.TerrainLayerAssetInspectorWidget
 import com.mbrlabs.mundus.editor.ui.modules.inspector.assets.TextureAssetInspectorWidget
 import com.mbrlabs.mundus.editor.ui.modules.inspector.assets.UsedByAssetInspectorWidget
 
@@ -37,6 +38,7 @@ class AssetInspector : VisTable() {
     private val modelWidget = ModelAssetInspectorWidget()
     private val textureWidget = TextureAssetInspectorWidget()
     private val terrainWidget = TerrainAssetInspectorWidget()
+    private val terrainLayerWidget = TerrainLayerAssetInspectorWidget()
     private val usedByWidget = UsedByAssetInspectorWidget()
     private var projectManager: ProjectManager
 
@@ -57,6 +59,9 @@ class AssetInspector : VisTable() {
             } else if (value is TerrainAsset) {
                 add(terrainWidget).growX().row()
                 terrainWidget.setTerrainAsset(value)
+            } else if (value is TerrainLayerAsset) {
+                add(terrainLayerWidget).growX().row()
+                terrainLayerWidget.setTerrainLayerAsset(value)
             }
 
             add(usedByWidget).padTop(10f).growX().row()

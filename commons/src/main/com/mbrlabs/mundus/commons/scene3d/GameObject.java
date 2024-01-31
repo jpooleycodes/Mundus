@@ -243,6 +243,22 @@ public class GameObject extends SimpleNode<GameObject> implements Iterable<GameO
     }
 
     /**
+     * Returns the child GameObject matching the ID.
+     *
+     * @param id The GameObject ID to search for.
+     * @return The child GameObject found or null if no found.
+     */
+    public GameObject findChildById(final int id) {
+        for (final GameObject go: this) {
+            if (go.id == id) {
+                return go;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Returns an Array of all child GameObjects matching the name.
      *
      * @param name the GameObject name to search for

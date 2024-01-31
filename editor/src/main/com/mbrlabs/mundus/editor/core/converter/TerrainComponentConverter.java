@@ -58,6 +58,22 @@ public class TerrainComponentConverter {
         TerrainComponentDTO descriptor = new TerrainComponentDTO();
         descriptor.setTerrainID(terrainComponent.getTerrainAsset().getID());
 
+        if (terrainComponent.getTopNeighbor() != null) {
+            descriptor.setTopNeighborID(terrainComponent.getTopNeighbor().getGameObject().id);
+        }
+
+        if (terrainComponent.getRightNeighbor() != null) {
+            descriptor.setRightNeighborID(terrainComponent.getRightNeighbor().getGameObject().id);
+        }
+
+        if (terrainComponent.getBottomNeighbor() != null) {
+            descriptor.setBottomNeighborID(terrainComponent.getBottomNeighbor().getGameObject().id);
+        }
+
+        if (terrainComponent.getLeftNeighbor() != null) {
+            descriptor.setLeftNeighborID(terrainComponent.getLeftNeighbor().getGameObject().id);
+        }
+
         return descriptor;
     }
 

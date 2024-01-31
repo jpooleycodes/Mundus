@@ -38,6 +38,7 @@ public class GameObjectDTO implements AssetUsageDTO {
 
     private ModelComponentDTO modelComponent;
     private TerrainComponentDTO terrainComponent;
+    private TerrainManagerComponentDTO terrainManagerComponent;
     private WaterComponentDTO waterComponent;
     private LightComponentDTO lightComponent;
     private CustomPropertiesComponentDTO customPropertiesComponent;
@@ -105,6 +106,14 @@ public class GameObjectDTO implements AssetUsageDTO {
 
     public void setTerrainComponent(TerrainComponentDTO terrainComponent) {
         this.terrainComponent = terrainComponent;
+    }
+
+    public TerrainManagerComponentDTO getTerrainManagerComponent() {
+        return terrainManagerComponent;
+    }
+
+    public void setTerrainManagerComponent(TerrainManagerComponentDTO terrainManagerComponent) {
+        this.terrainManagerComponent = terrainManagerComponent;
     }
 
     public WaterComponentDTO getWaterComponent() {

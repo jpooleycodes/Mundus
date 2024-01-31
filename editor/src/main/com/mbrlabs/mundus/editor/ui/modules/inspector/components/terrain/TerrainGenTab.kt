@@ -25,6 +25,7 @@ import com.mbrlabs.mundus.editor.ui.modules.inspector.components.terrain.generat
 import com.mbrlabs.mundus.editor.ui.modules.inspector.components.terrain.generation.PerlinNoiseTab
 
 /**
+ * @Deprecated
  * @author Marcus Brummer
  * @version 04-03-2016
  */
