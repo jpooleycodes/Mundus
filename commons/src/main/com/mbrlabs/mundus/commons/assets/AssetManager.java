@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import com.mbrlabs.mundus.commons.assets.meta.Meta;
 import com.mbrlabs.mundus.commons.assets.meta.MetaFileParseException;
 import com.mbrlabs.mundus.commons.assets.meta.MetaLoader;
+import com.mbrlabs.mundus.commons.assets.meta.MetaModel;
 import com.mbrlabs.mundus.commons.g3d.MG3dModelLoader;
 import com.mbrlabs.mundus.commons.terrain.Terrain;
 import com.mbrlabs.mundus.commons.terrain.TerrainLoader;
@@ -324,8 +325,11 @@ public class AssetManager implements Disposable {
         for (Asset asset : assets) {
             if (asset instanceof MaterialAsset) continue;
             if (asset instanceof ModelAsset) {
-                int modelBones = asset.getMeta().getModel().getNumBones();
-                maxNumBones = Math.max(modelBones, maxNumBones);
+                MetaModel model = asset.getMeta().getModel();
+                if (model != null) {
+                    int modelBones = model.getNumBones();
+                    maxNumBones = Math.max(modelBones, maxNumBones);
+                }
             }
             asset.resolveDependencies(assetIndex);
             asset.applyDependencies();

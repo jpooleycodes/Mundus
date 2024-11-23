@@ -105,6 +105,9 @@ public class ModelAsset extends Asset {
     public void resolveDependencies(Map<String, Asset> assets) {
         // materials
         MetaModel metaModel = meta.getModel();
+        if (metaModel == null) {
+            return;
+        }
         for (String g3dbMatID : metaModel.getDefaultMaterials().keys()) {
             String uuid = metaModel.getDefaultMaterials().get(g3dbMatID);
             defaultMaterials.put(g3dbMatID, (MaterialAsset) assets.get(uuid));
