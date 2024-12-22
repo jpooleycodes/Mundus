@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.pluginapi;
+package com.mbrlabs.mundus.editorcommons.types;
 
-import com.mbrlabs.mundus.pluginapi.manager.PluginEventManager;
-import org.pf4j.ExtensionPoint;
-
-public interface EventExtension extends ExtensionPoint {
-
-    /**
-     * Here can register events via plugin event manager.
-     *
-     * @param pluginEventManager The plugin event manager.
-     */
-    void manageEvents(PluginEventManager pluginEventManager);
+/**
+ * Toast type determines background color of toast.
+ */
+public enum ToastType {
+    SUCCESS, INFO, ERROR
 }

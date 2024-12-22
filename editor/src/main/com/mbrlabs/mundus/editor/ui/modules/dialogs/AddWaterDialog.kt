@@ -12,7 +12,6 @@ import com.mbrlabs.mundus.commons.assets.WaterAsset
 import com.mbrlabs.mundus.commons.scene3d.GameObject
 import com.mbrlabs.mundus.commons.water.Water
 import com.mbrlabs.mundus.editor.Mundus
-import com.mbrlabs.mundus.editor.assets.AssetAlreadyExistsException
 import com.mbrlabs.mundus.editor.core.io.IOManager
 import com.mbrlabs.mundus.editor.core.io.IOManagerProvider
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
@@ -24,6 +23,7 @@ import com.mbrlabs.mundus.editor.ui.widgets.IntegerFieldWithLabel
 import com.mbrlabs.mundus.editor.ui.widgets.ToolTipLabel
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editor.utils.createWaterGO
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 
 class AddWaterDialog : BaseDialog("Add Water") {
 

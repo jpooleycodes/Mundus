@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.pluginapi;
+package com.mbrlabs.mundus.editor.plugin
 
-import com.mbrlabs.mundus.pluginapi.manager.PluginEventManager;
-import org.pf4j.ExtensionPoint;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell
+import com.mbrlabs.mundus.pluginapi.ui.Label
+import com.mbrlabs.mundus.pluginapi.ui.LabelCell
 
-public interface EventExtension extends ExtensionPoint {
-
-    /**
-     * Here can register events via plugin event manager.
-     *
-     * @param pluginEventManager The plugin event manager.
-     */
-    void manageEvents(PluginEventManager pluginEventManager);
+class LabelCellImpl(private val labelCell: Cell<LabelImpl>) : CellImpl(labelCell), LabelCell {
+    override fun getLabel(): Label = labelCell.actor
 }

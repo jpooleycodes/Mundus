@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2024. See AUTHORS file.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.mbrlabs.mundus.editor.plugin
 
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -11,6 +27,7 @@ import com.kotcrab.vis.ui.widget.VisRadioButton
 import com.kotcrab.vis.ui.widget.VisSelectBox
 import com.kotcrab.vis.ui.widget.VisTable
 import com.kotcrab.vis.ui.widget.VisTextButton
+import com.kotcrab.vis.ui.widget.VisTextField
 import com.kotcrab.vis.ui.widget.spinner.IntSpinnerModel
 import com.kotcrab.vis.ui.widget.spinner.SimpleFloatSpinnerModel
 import com.kotcrab.vis.ui.widget.spinner.Spinner
@@ -26,14 +43,28 @@ import com.mbrlabs.mundus.pluginapi.ui.RootWidget
 import com.mbrlabs.mundus.pluginapi.ui.IntSpinnerListener
 import com.mbrlabs.mundus.pluginapi.ui.SpinnerListener
 import com.mbrlabs.mundus.pluginapi.ui.Cell
+import com.mbrlabs.mundus.pluginapi.ui.LabelCell
 import com.mbrlabs.mundus.pluginapi.ui.RootWidgetCell
 import com.mbrlabs.mundus.pluginapi.ui.SelectBoxListener
+import com.mbrlabs.mundus.pluginapi.ui.TextFieldChangeListener
 
 class RootWidgetImpl : VisTable(), RootWidget {
 
-    override fun addLabel(text: String): Cell {
-        val label = VisLabel(text)
+    override fun addLabel(text: String): LabelCell {
+        val label = LabelImpl(text)
         val cell = add(label)
+        return LabelCellImpl(cell)
+    }
+
+    override fun addTextField(listener: TextFieldChangeListener): Cell {
+        val textField = VisTextField()
+        textField.addListener(object : ChangeListener() {
+            override fun changed(event: ChangeEvent, actor: Actor) {
+                listener.changed(textField.text)
+            }
+        })
+
+        val cell = add(textField)
         return CellImpl(cell)
     }
 

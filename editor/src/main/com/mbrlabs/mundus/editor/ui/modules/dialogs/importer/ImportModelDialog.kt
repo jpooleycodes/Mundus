@@ -48,7 +48,6 @@ import com.mbrlabs.mundus.commons.utils.ModelUtils
 import com.mbrlabs.mundus.commons.utils.MundusShaderParser
 import com.mbrlabs.mundus.commons.utils.ShaderUtils
 import com.mbrlabs.mundus.editor.Mundus
-import com.mbrlabs.mundus.editor.assets.AssetAlreadyExistsException
 import com.mbrlabs.mundus.editor.assets.FileHandleWithDependencies
 import com.mbrlabs.mundus.editor.assets.MetaSaver
 import com.mbrlabs.mundus.editor.assets.ModelImporter
@@ -67,6 +66,7 @@ import com.mbrlabs.mundus.editor.utils.isG3DB
 import com.mbrlabs.mundus.editor.utils.isGLB
 import com.mbrlabs.mundus.editor.utils.isGLTF
 import com.mbrlabs.mundus.editor.utils.isWavefont
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 import net.mgsx.gltf.loaders.glb.GLBLoader
 import net.mgsx.gltf.loaders.gltf.GLTFLoader
 import net.mgsx.gltf.scene3d.attributes.PBRCubemapAttribute

@@ -11,7 +11,6 @@ import com.kotcrab.vis.ui.widget.VisTextButton
 import com.mbrlabs.mundus.commons.assets.Asset
 import com.mbrlabs.mundus.commons.assets.MaterialAsset
 import com.mbrlabs.mundus.editor.Mundus
-import com.mbrlabs.mundus.editor.assets.AssetAlreadyExistsException
 import com.mbrlabs.mundus.editor.assets.AssetMaterialFilter
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.events.AssetSelectedEvent
@@ -19,6 +18,7 @@ import com.mbrlabs.mundus.editor.events.MaterialDuplicatedEvent
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.assets.AssetPickerDialog
 import com.mbrlabs.mundus.editor.utils.Colors
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 import java.io.FileNotFoundException
 
 /**

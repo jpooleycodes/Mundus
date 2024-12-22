@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016. See AUTHORS file.
+ * Copyright (c) 2024. See AUTHORS file.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.mbrlabs.mundus.commons.assets.meta;
 
-package com.mbrlabs.mundus.editor.events
+import com.badlogic.gdx.utils.ObjectMap;
 
-import com.mbrlabs.mundus.editor.core.project.ProjectContext
-import com.mbrlabs.mundus.editorcommons.Subscribe
+public class MetaCustom {
 
-/**
- * @author Marcus Brummer
- * @version 24-12-2015
- */
-class ProjectChangedEvent(val projectContext: ProjectContext) {
+    public static final String JSON_PROPERTIES = "properties";
 
-    interface ProjectChangedListener {
-        @Subscribe
-        fun onProjectChanged(event: ProjectChangedEvent)
+    private final ObjectMap<String, String> properties = new ObjectMap<>();
+
+    public ObjectMap<String, String> getProperties() {
+        return properties;
     }
 
+    @Override
+    public String toString() {
+        return "MetaCustom{" +
+                "properties=" + properties +
+                '}';
+    }
 }

@@ -26,9 +26,9 @@ import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.io.IOManager
 import com.mbrlabs.mundus.editor.core.io.IOManagerProvider
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.widgets.FileChooserField
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
 
 /**
  * @author Marcus Brummer

@@ -17,12 +17,12 @@ import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.events.LogEvent
 import com.mbrlabs.mundus.editor.events.LogType
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
-import com.mbrlabs.mundus.editor.events.SceneChangedEvent
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.widgets.ColorPickerField
 import com.mbrlabs.mundus.editor.ui.widgets.ImprovedSlider
 import com.mbrlabs.mundus.editor.ui.widgets.ToolTipLabel
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent
 
 /**
  * @author JamesTKhan

@@ -36,7 +36,9 @@ public enum AssetType {
     /** Water file. Contains data for water. */
     WATER("Water"),
     /** Skybox file. Holds reference to skybox textures. **/
-    SKYBOX("Skybox");
+    SKYBOX("Skybox"),
+    /** Custom file. For plugins. **/
+    CUSTOM("Custom");
 
     private final String value;
 

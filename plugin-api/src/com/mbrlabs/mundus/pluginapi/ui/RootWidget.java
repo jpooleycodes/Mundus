@@ -28,7 +28,14 @@ public interface RootWidget {
      * @param text The text of label.
      * @return The created widget.
      */
-    Cell addLabel(String text);
+    LabelCell addLabel(String text);
+
+    /**
+     * Adds text field.
+     * @param listener The listener for text field.
+     * @return The created text field.
+     */
+    Cell addTextField(TextFieldChangeListener listener);
 
     /**
      * Adds text button.

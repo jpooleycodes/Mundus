@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.editor.assets
+package com.mbrlabs.mundus.editorcommons.exceptions;
 
-/**
- * @author Marcus Brummer
- * @version 10-10-2016
- */
-class AssetAlreadyExistsException : Exception()
+public class AssetAlreadyExistsException extends Exception {
+}

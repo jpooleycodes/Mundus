@@ -19,6 +19,7 @@ package com.mbrlabs.mundus.editor.core.converter;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.mbrlabs.mundus.commons.assets.Asset;
 import com.mbrlabs.mundus.commons.dto.CustomComponentDTO;
@@ -30,6 +31,7 @@ import com.mbrlabs.mundus.commons.scene3d.SceneGraph;
 import com.mbrlabs.mundus.commons.scene3d.components.Component;
 import com.mbrlabs.mundus.commons.scene3d.components.CustomPropertiesComponent;
 import com.mbrlabs.mundus.commons.scene3d.components.LightComponent;
+import com.mbrlabs.mundus.commons.utils.AssetUtils;
 import com.mbrlabs.mundus.editor.scene3d.components.PickableModelComponent;
 import com.mbrlabs.mundus.editor.scene3d.components.PickableTerrainComponent;
 import com.mbrlabs.mundus.editor.scene3d.components.PickableWaterComponent;
@@ -96,7 +98,9 @@ public class GameObjectConverter {
                     final CustomComponentConverter converter = customComponentConverters.get(ii);
 
                     if (componentType == converter.getComponentType()) {
-                        final Component customComponent = converter.convert(go, customComponentDTO.getProperties());
+                        final Array<String> assetIds = customComponentDTO.getAssetIds();
+                        final ObjectMap<String, Asset> assetMap = AssetUtils.getAssetsById(assetIds, assets);
+                        final Component customComponent = converter.convert(go, customComponentDTO.getProperties(), assetMap);
 
                         if (customComponent != null) {
                             go.getComponents().add(customComponent);
@@ -176,6 +180,7 @@ public class GameObjectConverter {
                             final CustomComponentDTO customComponentDTO = new CustomComponentDTO();
                             customComponentDTO.setComponentType(c.getType().name());
                             customComponentDTO.setProperties(customComponentProperties);
+                            customComponentDTO.setAssetIds(converter.getAssetIds(c));
 
                             descriptor.getCustomComponents().add(customComponentDTO);
                         }

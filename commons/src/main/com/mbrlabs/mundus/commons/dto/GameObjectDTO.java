@@ -154,6 +154,15 @@ public class GameObjectDTO implements AssetUsageDTO {
             return true;
         }
 
+        if (customComponents != null) {
+            for (int i = 0; i < customComponents.size; ++i) {
+                final CustomComponentDTO customComponent = customComponents.get(i);
+                if (customComponent.usesAsset(assetToCheck, assetMap)) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 }

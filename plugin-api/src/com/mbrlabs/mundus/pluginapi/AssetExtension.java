@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016. See AUTHORS file.
+ * Copyright (c) 2024. See AUTHORS file.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.editor.events
+package com.mbrlabs.mundus.pluginapi;
 
-import com.mbrlabs.mundus.editorcommons.Subscribe
+import com.mbrlabs.mundus.pluginapi.manager.AssetManager;
+import org.pf4j.ExtensionPoint;
 
-/**
- * @author Marcus Brummer
- * @version 21-01-2016
- */
-class SceneChangedEvent {
+public interface AssetExtension extends ExtensionPoint {
 
-    interface SceneChangedListener {
-        @Subscribe
-        fun onSceneChanged(event: SceneChangedEvent)
-    }
-
+    void assetManager(AssetManager assetManager);
 }

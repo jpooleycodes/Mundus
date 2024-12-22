@@ -27,9 +27,9 @@ import com.kotcrab.vis.ui.widget.VisTextField
 import com.kotcrab.vis.ui.widget.color.ColorPickerAdapter
 import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
-import com.mbrlabs.mundus.editor.events.SceneChangedEvent
 import com.mbrlabs.mundus.editor.ui.widgets.ColorPickerField
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent
 import net.mgsx.gltf.scene3d.attributes.FogAttribute
 
 /**

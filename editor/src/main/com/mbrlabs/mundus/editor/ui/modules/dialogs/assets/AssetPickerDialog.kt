@@ -28,10 +28,10 @@ import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.assets.AssetFilter
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.events.AssetImportEvent
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.BaseDialog
 import com.mbrlabs.mundus.editor.ui.widgets.AutoFocusListView
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
 
 /**
  * A filterable list of materials.

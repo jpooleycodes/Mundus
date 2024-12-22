@@ -9,10 +9,10 @@ import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.plugin.PluginManagerProvider
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.core.scene.SceneManager
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
-import com.mbrlabs.mundus.editor.events.SceneChangedEvent
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.widgets.ToolTipLabel
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent
 import org.pf4j.PluginManager
 
 /**

@@ -396,6 +396,9 @@ public class AssetManager implements Disposable {
             case SKYBOX:
                 asset = loadSkyboxAsset(meta, assetFile);
                 break;
+            case CUSTOM:
+                asset = loadCustomAsset(meta, assetFile);
+                break;
             default:
                 return null;
         }
@@ -406,6 +409,12 @@ public class AssetManager implements Disposable {
 
     private Asset loadSkyboxAsset(Meta meta, FileHandle assetFile) {
         SkyboxAsset asset = new SkyboxAsset(meta, assetFile);
+        asset.load(gdxAssetManager);
+        return asset;
+    }
+
+    private CustomAsset loadCustomAsset(Meta mea, FileHandle assetFile) {
+        final CustomAsset asset = new CustomAsset(mea, assetFile);
         asset.load(gdxAssetManager);
         return asset;
     }

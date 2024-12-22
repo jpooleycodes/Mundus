@@ -21,6 +21,7 @@ import com.kotcrab.vis.ui.util.ToastManager
 import com.kotcrab.vis.ui.widget.VisLabel
 import com.kotcrab.vis.ui.widget.VisTable
 import com.kotcrab.vis.ui.widget.toast.Toast
+import com.mbrlabs.mundus.editorcommons.types.ToastType
 import java.util.*
 
 /**
@@ -30,11 +31,6 @@ import java.util.*
  * @version 07-06-2016
  */
 class Toaster(stage: Stage) {
-
-    /** Toast type determines background color of toast.  */
-    enum class ToastType {
-        SUCCESS, INFO, ERROR
-    }
 
     private val toastManager: ToastManager = ToastManager(stage)
 

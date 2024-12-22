@@ -15,9 +15,9 @@ import com.mbrlabs.mundus.commons.shadows.ShadowResolution
 import com.mbrlabs.mundus.commons.utils.LightUtils
 import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
-import com.mbrlabs.mundus.editor.events.SceneChangedEvent
 import com.mbrlabs.mundus.editor.ui.widgets.ToolTipLabel
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent
 
 /**
  * @author JamesTKhan

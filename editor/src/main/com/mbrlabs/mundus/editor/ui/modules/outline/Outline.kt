@@ -47,6 +47,8 @@ import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.utils.Colors
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editorcommons.events.GameObjectModifiedEvent
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent
 
 /**
  * Outline shows overview about all game objects in the scene

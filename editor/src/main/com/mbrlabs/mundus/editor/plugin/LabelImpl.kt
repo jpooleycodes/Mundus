@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.pluginapi;
+package com.mbrlabs.mundus.editor.plugin
 
-import com.mbrlabs.mundus.pluginapi.manager.PluginEventManager;
-import org.pf4j.ExtensionPoint;
+import com.kotcrab.vis.ui.widget.VisLabel
+import com.mbrlabs.mundus.pluginapi.ui.Label
 
-public interface EventExtension extends ExtensionPoint {
-
-    /**
-     * Here can register events via plugin event manager.
-     *
-     * @param pluginEventManager The plugin event manager.
-     */
-    void manageEvents(PluginEventManager pluginEventManager);
+class LabelImpl(text: String) : VisLabel(text), Label {
+    override fun setText(text: String) {
+        setText(text as CharSequence)
+    }
 }

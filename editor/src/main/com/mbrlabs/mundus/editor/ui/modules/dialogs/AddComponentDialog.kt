@@ -60,9 +60,14 @@ class AddComponentDialog : BaseDialog("Add Component") {
         })
         pluginManager.getExtensions(ComponentExtension::class.java).forEach {
             try {
-                addableTypes.add(object : DropdownComponent(it.componentName) {
-                    override fun createComponent(gameObject: GameObject): Component? = it.createComponent(gameObject)
-                })
+                val supportedComponentTypes = it.supportedComponentTypes
+
+                if (supportedComponentTypes == null || containsSupportedComponentType(supportedComponentTypes)) {
+                    addableTypes.add(object : DropdownComponent(it.componentName) {
+                        override fun createComponent(gameObject: GameObject): Component? =
+                            it.createComponent(gameObject)
+                    })
+                }
             } catch (ex: Exception) {
                 Mundus.postEvent(LogEvent(LogType.ERROR, "Exception during create component! $ex"))
             }
@@ -88,11 +93,27 @@ class AddComponentDialog : BaseDialog("Add Component") {
         add(root)
     }
 
+    private fun getSelectedGameObject(): GameObject {
+        return UI.outline.getSelectedGameObject()!!
+    }
+
+    private fun containsSupportedComponentType(supportedComponentTypes: Array<Component.Type>): Boolean {
+        val gameObject = getSelectedGameObject()
+
+        for (supportedComponentType in supportedComponentTypes) {
+            if (gameObject.findComponentByType<Component>(supportedComponentType) != null) {
+                return true
+            }
+        }
+
+        return false
+    }
+
     private fun setupListeners() {
         addBtn.addListener(object : ClickListener () {
             override fun clicked(event: InputEvent?, x: Float, y: Float) {
                 // Add component to current game object
-                val go = UI.outline.getSelectedGameObject()!!
+                val go = getSelectedGameObject()
 
                 val component = selectBox.selected.createComponent(go)
                 if (component != null) {

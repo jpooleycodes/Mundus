@@ -24,10 +24,10 @@ import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.events.AssetSelectedEvent
 import com.mbrlabs.mundus.editor.events.ComponentAddedEvent
 import com.mbrlabs.mundus.editor.events.GameObjectSelectedEvent
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
 import com.mbrlabs.mundus.editor.ui.widgets.AutoFocusScrollPane
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editorcommons.events.GameObjectModifiedEvent
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
 
 /**
  * @author Marcus Brummer

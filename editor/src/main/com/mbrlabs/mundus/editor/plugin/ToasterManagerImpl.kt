@@ -14,17 +14,27 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.pluginapi;
+package com.mbrlabs.mundus.editor.plugin
 
-import com.mbrlabs.mundus.pluginapi.manager.PluginEventManager;
-import org.pf4j.ExtensionPoint;
+import com.mbrlabs.mundus.editor.ui.UI
+import com.mbrlabs.mundus.editorcommons.types.ToastType
+import com.mbrlabs.mundus.pluginapi.manager.ToasterManager
 
-public interface EventExtension extends ExtensionPoint {
+class ToasterManagerImpl : ToasterManager {
 
-    /**
-     * Here can register events via plugin event manager.
-     *
-     * @param pluginEventManager The plugin event manager.
-     */
-    void manageEvents(PluginEventManager pluginEventManager);
+    override fun info(text: String) {
+        UI.toaster.info(text)
+    }
+
+    override fun error(text: String) {
+        UI.toaster.error(text)
+    }
+
+    override fun success(text: String) {
+        UI.toaster.success(text)
+    }
+
+    override fun sticky(type: ToastType, text: String) {
+        UI.toaster.sticky(type, text)
+    }
 }

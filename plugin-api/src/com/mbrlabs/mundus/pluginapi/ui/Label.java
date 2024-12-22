@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.pluginapi;
+package com.mbrlabs.mundus.pluginapi.ui;
 
-import com.mbrlabs.mundus.pluginapi.manager.PluginEventManager;
-import org.pf4j.ExtensionPoint;
-
-public interface EventExtension extends ExtensionPoint {
+/**
+ * Label widget.
+ */
+public interface Label {
 
     /**
-     * Here can register events via plugin event manager.
+     * Sets text on widget.
      *
-     * @param pluginEventManager The plugin event manager.
+     * @param text The new text.
      */
-    void manageEvents(PluginEventManager pluginEventManager);
+    void setText(String text);
 }

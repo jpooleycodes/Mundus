@@ -27,7 +27,6 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs
 import com.kotcrab.vis.ui.widget.VisTable
 import com.kotcrab.vis.ui.widget.VisTextButton
 import com.mbrlabs.mundus.editor.Mundus
-import com.mbrlabs.mundus.editor.assets.AssetAlreadyExistsException
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.events.AssetImportEvent
 import com.mbrlabs.mundus.editor.events.FilesDroppedEvent
@@ -37,6 +36,7 @@ import com.mbrlabs.mundus.editor.ui.widgets.ImageChooserField
 import com.mbrlabs.mundus.editor.utils.ImageUtils
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editor.utils.isImage
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 import java.io.File
 import java.io.IOException
 

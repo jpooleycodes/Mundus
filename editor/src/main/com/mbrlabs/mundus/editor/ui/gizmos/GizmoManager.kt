@@ -9,9 +9,9 @@ import com.mbrlabs.mundus.commons.scene3d.components.LightComponent
 import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.events.ComponentAddedEvent
 import com.mbrlabs.mundus.editor.events.ComponentRemovedEvent
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
-import com.mbrlabs.mundus.editor.events.SceneChangedEvent
 import com.mbrlabs.mundus.editor.events.SceneGraphChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent
 
 /**
  * Responsible for rendering Gizmos in the scene and listens for when new components are added.

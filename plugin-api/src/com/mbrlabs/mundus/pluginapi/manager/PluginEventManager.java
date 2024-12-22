@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.pluginapi;
+package com.mbrlabs.mundus.pluginapi.manager;
 
 import com.mbrlabs.mundus.editorcommons.EventListener;
 
 public interface PluginEventManager {
 
     /**
-     * Registerrs event listeners in Editor.
+     * Registers event listeners in Editor.
      *
      * @param listener The event listener.
      */

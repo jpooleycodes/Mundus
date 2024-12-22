@@ -46,6 +46,7 @@ import com.mbrlabs.mundus.editor.events.*
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.widgets.AutoFocusScrollPane
 import com.mbrlabs.mundus.editor.utils.ObjExporter
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
 import java.awt.Desktop
 import java.lang.RuntimeException
 

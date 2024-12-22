@@ -42,6 +42,8 @@ public class MetaLoader {
             parseTerrain(meta, json.get(Meta.JSON_TERRAIN));
         } else if(meta.getType() == AssetType.MODEL) {
             parseModel(meta, json.get(Meta.JSON_MODEL));
+        } else if (meta.getType() == AssetType.CUSTOM) {
+            parseCustom(meta, json.get(Meta.JSON_CUSTOM));
         }
 
         return meta;
@@ -95,6 +97,22 @@ public class MetaLoader {
         }
 
         meta.setModel(model);
+    }
+
+    private void parseCustom(Meta meta, JsonValue jsonCustom) {
+        if (jsonCustom == null) return;
+
+        final MetaCustom custom = new MetaCustom();
+
+        final JsonValue properties = jsonCustom.get(MetaCustom.JSON_PROPERTIES);
+        for (int i = 0; i < properties.size; ++i) {
+            final JsonValue property = properties.get(i);
+            final String id = property.name;
+            final String value = properties.getString(id);
+            custom.getProperties().put(id, value);
+        }
+
+        meta.setCustom(custom);
     }
 
     /**

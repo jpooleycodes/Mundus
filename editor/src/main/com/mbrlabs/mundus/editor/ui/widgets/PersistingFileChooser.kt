@@ -3,8 +3,8 @@ package com.mbrlabs.mundus.editor.ui.widgets
 import com.kotcrab.vis.ui.widget.file.FileChooser
 import com.mbrlabs.mundus.editor.Mundus
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
-import com.mbrlabs.mundus.editor.events.ProjectChangedEvent
 import com.mbrlabs.mundus.editor.preferences.MundusPreferencesManager
+import com.mbrlabs.mundus.editorcommons.events.ProjectChangedEvent
 
 /**
  * Extends FileChooser to add behavior that sets the current chooser directory to the

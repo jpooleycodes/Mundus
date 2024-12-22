@@ -31,7 +31,6 @@ import com.mbrlabs.mundus.commons.scene3d.components.TerrainComponent
 import com.mbrlabs.mundus.commons.terrain.SplatMapResolution
 import com.mbrlabs.mundus.commons.terrain.Terrain
 import com.mbrlabs.mundus.editor.Mundus
-import com.mbrlabs.mundus.editor.assets.AssetAlreadyExistsException
 import com.mbrlabs.mundus.editor.core.io.IOManager
 import com.mbrlabs.mundus.editor.core.io.IOManagerProvider
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
@@ -44,6 +43,7 @@ import com.mbrlabs.mundus.editor.ui.widgets.ToolTipLabel
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editor.utils.createTerrainGO
 import com.mbrlabs.mundus.editorcommons.events.TerrainAddedEvent
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 
 /**
  * @author Marcus Brummer

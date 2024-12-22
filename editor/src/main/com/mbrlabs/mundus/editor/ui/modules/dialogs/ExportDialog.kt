@@ -29,6 +29,7 @@ import com.mbrlabs.mundus.editor.exporter.Exporter
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editor.utils.Toaster
+import com.mbrlabs.mundus.editorcommons.types.ToastType
 import org.pf4j.PluginManager
 
 /**
@@ -94,7 +95,7 @@ class ExportDialog : VisDialog("Exporting") {
 
             override fun failed(message: String?, exception: Exception?) {
                 Log.exception("Exporter", exception)
-                UI.toaster.sticky(Toaster.ToastType.ERROR, "Export failed: " + exception.toString())
+                UI.toaster.sticky(ToastType.ERROR, "Export failed: " + exception.toString())
                 error = true
                 resetValues()
                 close()

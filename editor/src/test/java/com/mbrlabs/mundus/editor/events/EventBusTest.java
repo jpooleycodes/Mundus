@@ -1,6 +1,7 @@
 package com.mbrlabs.mundus.editor.events;
 
 import com.mbrlabs.mundus.editorcommons.Subscribe;
+import com.mbrlabs.mundus.editorcommons.events.SceneChangedEvent;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,7 +35,7 @@ public class EventBusTest {
         int sceneAddedCount = 5;
 
         for (int i = 0; i < sceneChangedCount; i++) {
-            eventBus.post(new SceneChangedEvent());
+            eventBus.post(new SceneChangedEvent(null));
         }
 
         for (int i = 0; i < sceneAddedCount; i++) {
@@ -60,11 +61,11 @@ public class EventBusTest {
 
         // register and post, should receive 1 event
         eventBus.register(subscriber);
-        eventBus.post(new SceneChangedEvent());
+        eventBus.post(new SceneChangedEvent(null));
 
         // unregister and post, should not receive any events
         eventBus.unregister(subscriber);
-        eventBus.post(new SceneChangedEvent());
+        eventBus.post(new SceneChangedEvent(null));
 
         // should still be 1
         Assert.assertEquals(sceneChangedEventsReceived[0], 1);

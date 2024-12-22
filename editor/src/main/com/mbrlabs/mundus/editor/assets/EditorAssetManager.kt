@@ -28,6 +28,7 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs
 import com.mbrlabs.mundus.commons.assets.Asset
 import com.mbrlabs.mundus.commons.assets.AssetManager
 import com.mbrlabs.mundus.commons.assets.AssetType
+import com.mbrlabs.mundus.commons.assets.CustomAsset
 import com.mbrlabs.mundus.commons.assets.MaterialAsset
 import com.mbrlabs.mundus.commons.assets.ModelAsset
 import com.mbrlabs.mundus.commons.assets.PixmapTextureAsset
@@ -37,6 +38,7 @@ import com.mbrlabs.mundus.commons.assets.TexCoordInfo
 import com.mbrlabs.mundus.commons.assets.TextureAsset
 import com.mbrlabs.mundus.commons.assets.WaterAsset
 import com.mbrlabs.mundus.commons.assets.meta.Meta
+import com.mbrlabs.mundus.commons.assets.meta.MetaCustom
 import com.mbrlabs.mundus.commons.assets.meta.MetaTerrain
 import com.mbrlabs.mundus.commons.dto.GameObjectDTO
 import com.mbrlabs.mundus.commons.dto.SceneDTO
@@ -52,6 +54,7 @@ import com.mbrlabs.mundus.editor.events.LogType
 import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.utils.Log
 import com.mbrlabs.mundus.editor.utils.ThumbnailGenerator
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 import net.mgsx.gltf.exporters.GLTFExporter
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
@@ -523,6 +526,20 @@ class EditorAssetManager(assetsRoot: FileHandle) : AssetManager(assetsRoot) {
         return asset
     }
 
+    @Throws(IOException::class, AssetAlreadyExistsException::class)
+    fun createCustomAsset(file: FileHandle): CustomAsset {
+        val meta = createMetaFileFromAsset(file, AssetType.CUSTOM)
+        meta.custom = MetaCustom()
+        metaSaver.save(meta)
+        val importedAssetFile = copyToAssetFolder(file)
+
+        val asset = CustomAsset(meta, importedAssetFile)
+        asset.load()
+
+        addAsset(asset)
+        return asset
+    }
+
     /**
      * @param asset
      * @throws IOException
@@ -539,6 +556,8 @@ class EditorAssetManager(assetsRoot: FileHandle) : AssetManager(assetsRoot) {
             saveWaterAsset(asset)
         } else if (asset is SkyboxAsset) {
             saveSkyboxAsset(asset)
+        } else if (asset is CustomAsset) {
+            saveCustomAsset(asset)
         }
         // TODO other assets ?
     }
@@ -885,6 +904,11 @@ class EditorAssetManager(assetsRoot: FileHandle) : AssetManager(assetsRoot) {
         fileOutputStream.flush()
         fileOutputStream.close()
 
+        // save meta file
+        metaSaver.save(asset.meta)
+    }
+
+    private fun saveCustomAsset(asset: CustomAsset) {
         // save meta file
         metaSaver.save(asset.meta)
     }

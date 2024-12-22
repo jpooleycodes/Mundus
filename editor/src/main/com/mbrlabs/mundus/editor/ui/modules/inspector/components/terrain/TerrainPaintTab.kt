@@ -28,7 +28,6 @@ import com.mbrlabs.mundus.commons.assets.Asset
 import com.mbrlabs.mundus.commons.assets.TextureAsset
 import com.mbrlabs.mundus.commons.terrain.SplatTexture
 import com.mbrlabs.mundus.editor.Mundus
-import com.mbrlabs.mundus.editor.assets.AssetAlreadyExistsException
 import com.mbrlabs.mundus.editor.assets.AssetTextureFilter
 import com.mbrlabs.mundus.editor.assets.MetaSaver
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
@@ -38,6 +37,7 @@ import com.mbrlabs.mundus.editor.ui.UI
 import com.mbrlabs.mundus.editor.ui.modules.dialogs.assets.AssetPickerDialog
 import com.mbrlabs.mundus.editor.ui.widgets.TextureGrid
 import com.mbrlabs.mundus.editor.utils.Log
+import com.mbrlabs.mundus.editorcommons.exceptions.AssetAlreadyExistsException
 import java.io.IOException
 
 /**

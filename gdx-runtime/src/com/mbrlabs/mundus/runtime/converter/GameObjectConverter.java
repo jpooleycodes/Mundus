@@ -16,6 +16,9 @@
 
 package com.mbrlabs.mundus.runtime.converter;
 
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
+import com.mbrlabs.mundus.commons.assets.Asset;
 import com.mbrlabs.mundus.commons.assets.AssetManager;
 import com.mbrlabs.mundus.commons.dto.CustomComponentDTO;
 import com.mbrlabs.mundus.commons.dto.GameObjectDTO;
@@ -25,6 +28,7 @@ import com.mbrlabs.mundus.commons.scene3d.GameObject;
 import com.mbrlabs.mundus.commons.scene3d.SceneGraph;
 import com.mbrlabs.mundus.commons.scene3d.components.Component;
 import com.mbrlabs.mundus.runtime.Shaders;
+import com.mbrlabs.mundus.commons.utils.AssetUtils;
 
 /**
  * Converter for game object.
@@ -82,7 +86,9 @@ public class GameObjectConverter {
                     final CustomComponentConverter converter = customComponentConverters[ii];
 
                     if (customComponentDTO.getComponentType().equals(converter.getComponentType().name())) {
-                        final Component component = converter.convert(go, customComponentDTO.getProperties());
+                        final Array<String> assetIds = customComponentDTO.getAssetIds();
+                        final ObjectMap<String, Asset> assetMap = AssetUtils.getAssetsById(assetIds, assetManager.getAssetMap());
+                        final Component component = converter.convert(go, customComponentDTO.getProperties(), assetMap);
 
                         if (component != null) {
                             go.getComponents().add(component);
