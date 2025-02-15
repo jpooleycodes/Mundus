@@ -171,6 +171,12 @@ public class SimpleNode<T extends SimpleNode> extends BaseNode<T> {
     }
 
     @Override
+    public void setLocalRotation(final Quaternion q) {
+        localRotation.set(q);
+        markDirty();
+    }
+
+    @Override
     public void setLocalRotation(float x, float y, float z, float w) {
         localRotation.set(x, y, z, w);
         markDirty();

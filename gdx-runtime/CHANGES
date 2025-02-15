@@ -11,6 +11,7 @@
 - Update gdx-gltf version to 2.2.1
 - Add findChildrenByComponent(Component.Type, Array<GameObject>) and findChildrenByTag(String, Array<GameObject>) methods into GameObject file
 - Set source compatibility to 1.8
+- Add setLocalRotation(Quaternion) method ino SimpleNode file
 
 [0.5.1] ~ 08/08/2023
 - Updated libGDX to 1.12.0

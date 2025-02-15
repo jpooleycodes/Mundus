@@ -240,6 +240,13 @@ public interface Node<T extends Node> {
     void setLocalPosition(float x, float y, float z);
 
     /**
+     * Sets the rotation relative to parent node.
+     *
+     * @param q The new rotation.
+     */
+    void setLocalRotation(Quaternion q);
+
+    /**
      * Sets the rotation relative to the parent node.
      *
      * @param x
