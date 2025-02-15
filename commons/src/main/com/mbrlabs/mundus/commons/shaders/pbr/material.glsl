@@ -340,7 +340,7 @@ vec3 getNormal()
     vec3 n = getColor(u_normalTexture, colorUv).rgb;
 
     #ifdef splatFlag
-    vec3 splatNormal;
+        vec3 splatNormal = vec3(0.0);
     #ifdef splatRNormalFlag
         splatNormal += getColor(u_texture_r_normal, colorUv).rgb * splat.r;
     #endif
