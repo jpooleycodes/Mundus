@@ -21,6 +21,7 @@ import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.g3d.Material
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
+import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute
 import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute
 import com.mbrlabs.mundus.commons.assets.MaterialAsset
 import com.mbrlabs.mundus.commons.assets.TextureAsset
@@ -184,8 +185,8 @@ class ModelImporter(private val registry: Registry) : SettingsChangedEvent.Setti
             materialAssetToPopulate.roughness = attr.value
         }
 
-        if (materialToUse.has(PBRFloatAttribute.AlphaTest)) {
-            val attr = materialToUse.get(PBRFloatAttribute.AlphaTest) as PBRFloatAttribute
+        if (materialToUse.has(FloatAttribute.AlphaTest)) {
+            val attr = materialToUse.get(FloatAttribute.AlphaTest) as FloatAttribute
             materialAssetToPopulate.alphaTest = attr.value
         }
 

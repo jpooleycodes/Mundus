@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Json
 import com.mbrlabs.mundus.commons.utils.FileFormatUtils
 import com.mbrlabs.mundus.editor.Mundus
+import com.mbrlabs.mundus.editor.events.LogEvent
+import com.mbrlabs.mundus.editor.events.LogType
 import net.mgsx.gltf.data.GLTF
 import net.mgsx.gltf.data.texture.GLTFTextureInfo
 import net.mgsx.gltf.scene3d.attributes.PBRTextureAttribute
@@ -57,7 +59,7 @@ class FileHandleWithDependencies(val file: FileHandle, val dependencies: ArrayLi
 
         val dto = json.fromJson(GLTF::class.java, file)
 
-        dto.materials?.forEach {
+        dto.materials?.filter { it.name != null }?.forEach {
             val attributeImageIndexMap = HashMap<Long, Int>()
 
             linkTextureToImage(dto, attributeImageIndexMap, it.pbrMetallicRoughness.baseColorTexture, PBRTextureAttribute.BaseColorTexture)
@@ -67,6 +69,9 @@ class FileHandleWithDependencies(val file: FileHandle, val dependencies: ArrayLi
             linkTextureToImage(dto, attributeImageIndexMap, it.occlusionTexture, PBRTextureAttribute.OcclusionTexture)
 
             materialImageMap[it.name] = attributeImageIndexMap
+        }
+        if (dto.materials?.filter { it.name == null }?.isNotEmpty() == true) {
+            Mundus.postEvent(LogEvent(LogType.WARN, "GLTF import: Some materials have empty \"name\" field so these materials will not set on models!"))
         }
 
         dto.images?.forEach {
