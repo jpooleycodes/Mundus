@@ -26,6 +26,8 @@ import com.mbrlabs.mundus.commons.scene3d.components.Component
 import com.mbrlabs.mundus.commons.scene3d.components.TerrainComponent
 import com.mbrlabs.mundus.commons.utils.Pools
 import com.mbrlabs.mundus.editor.Mundus
+import com.mbrlabs.mundus.editor.core.keymap.KeymapKey
+import com.mbrlabs.mundus.editor.core.keymap.KeymapManager
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.events.LogEvent
 import com.mbrlabs.mundus.editor.events.LogType
@@ -39,7 +41,8 @@ import org.pf4j.PluginManager
  */
 class FreeCamController(private val projectManager: ProjectManager,
                         private val goPicker: GameObjectPicker,
-                        private val pluginManager: PluginManager
+                        private val pluginManager: PluginManager,
+                        private val keymapManager: KeymapManager
 ) : InputAdapter() {
 
     val SPEED_01 = 10f
@@ -48,10 +51,6 @@ class FreeCamController(private val projectManager: ProjectManager,
 
     private var camera: Camera? = null
     private val keys = IntIntMap()
-    private val STRAFE_LEFT = Input.Keys.A
-    private val STRAFE_RIGHT = Input.Keys.D
-    private val FORWARD = Input.Keys.W
-    private val BACKWARD = Input.Keys.S
     private val UP = Input.Keys.Q
     private val DOWN = Input.Keys.E
     private val SHIFT_LEFT = Input.Keys.SHIFT_LEFT
@@ -153,19 +152,19 @@ class FreeCamController(private val projectManager: ProjectManager,
     }
 
     @JvmOverloads fun update(deltaTime: Float = Gdx.graphics.deltaTime) {
-        if (keys.containsKey(FORWARD)) {
+        if (keys.containsKey(keymapManager.getKey(KeymapKey.MOVE_FORWARD))) {
             tmp.set(camera!!.direction).nor().scl(deltaTime * velocity)
             camera!!.position.add(tmp)
         }
-        if (keys.containsKey(BACKWARD)) {
+        if (keys.containsKey(keymapManager.getKey(KeymapKey.MOVE_BACK))) {
             tmp.set(camera!!.direction).nor().scl(-deltaTime * velocity)
             camera!!.position.add(tmp)
         }
-        if (keys.containsKey(STRAFE_LEFT)) {
+        if (keys.containsKey(keymapManager.getKey(KeymapKey.STRAFE_LEFT))) {
             tmp.set(camera!!.direction).crs(camera!!.up).nor().scl(-deltaTime * velocity)
             camera!!.position.add(tmp)
         }
-        if (keys.containsKey(STRAFE_RIGHT)) {
+        if (keys.containsKey(keymapManager.getKey(KeymapKey.STRAFE_RIGHT))) {
             tmp.set(camera!!.direction).crs(camera!!.up).nor().scl(deltaTime * velocity)
             camera!!.position.add(tmp)
         }

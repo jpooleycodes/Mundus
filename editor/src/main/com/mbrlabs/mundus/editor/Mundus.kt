@@ -33,6 +33,7 @@ import com.mbrlabs.mundus.editor.assets.ModelImporter
 import com.mbrlabs.mundus.editor.core.io.IOManager
 import com.mbrlabs.mundus.editor.core.io.IOManagerProvider
 import com.mbrlabs.mundus.editor.core.io.MigrationIOManager
+import com.mbrlabs.mundus.editor.core.keymap.KeymapManager
 import com.mbrlabs.mundus.editor.core.plugin.PluginManagerProvider
 import com.mbrlabs.mundus.editor.core.project.ProjectManager
 import com.mbrlabs.mundus.editor.core.registry.Registry
@@ -92,6 +93,7 @@ object Mundus {
     private val globalPrefManager: MundusPreferencesManager
     private val glProfiler: MundusGLProfiler
     private val pluginManager: PluginManager
+    private val keymapManager: KeymapManager
 
     init {
         FileChooser.setDefaultPrefsName("mundus.editor.filechooser")
@@ -120,7 +122,8 @@ object Mundus {
         modelImporter = ModelImporter(registry)
         pluginManager = DefaultPluginManager(Paths.get(Registry.PLUGINS_DIR))
         projectManager = ProjectManager(ioManager, registry, modelBatch, pluginManager)
-        freeCamController = FreeCamController(projectManager, goPicker, pluginManager)
+        keymapManager = KeymapManager(registry.settings.customKeyboardShortcuts)
+        freeCamController = FreeCamController(projectManager, goPicker, pluginManager, keymapManager)
         globalPrefManager = MundusPreferencesManager("global")
         toolManager = ToolManager(input, projectManager, goPicker, handlePicker, shapeRenderer,
                 commandHistory, globalPrefManager)
@@ -152,6 +155,7 @@ object Mundus {
             bindSingleton(globalPrefManager)
             bindSingleton(glProfiler)
             bindSingleton(pluginManagerProvider)
+            bindSingleton(keymapManager)
 
             bindSingleton(MetaSaver())
             bindSingleton(MetaLoader())

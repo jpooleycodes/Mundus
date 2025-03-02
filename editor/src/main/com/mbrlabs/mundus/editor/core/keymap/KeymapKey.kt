@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016. See AUTHORS file.
+ * Copyright (c) 2025. See AUTHORS file.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package com.mbrlabs.mundus.editor.ui.modules.dialogs.settings
+package com.mbrlabs.mundus.editor.core.keymap
 
-import com.kotcrab.vis.ui.widget.VisTable
-
-/**
- * @author Marcus Brummer
- * @version 26-10-2016
- */
-abstract class BaseSettingsTable : VisTable() {
-
-    init {
-        top().left()
-        padRight(5f).padLeft(6f)
-    }
-
-    open fun onInit() {
-        // NOOP
-    }
-
-    abstract fun onSave()
-
+enum class KeymapKey {
+    MOVE_FORWARD,
+    MOVE_BACK,
+    STRAFE_LEFT,
+    STRAFE_RIGHT
 }

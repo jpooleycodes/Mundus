@@ -1,6 +1,10 @@
 package com.mbrlabs.mundus.editor.ui.modules.dialogs
 
+import com.badlogic.gdx.Input
 import com.kotcrab.vis.ui.widget.VisTable
+import com.mbrlabs.mundus.editor.Mundus
+import com.mbrlabs.mundus.editor.core.keymap.KeymapKey
+import com.mbrlabs.mundus.editor.core.keymap.KeymapManager
 
 /**
  * @author JamesTKhan
@@ -8,6 +12,7 @@ import com.kotcrab.vis.ui.widget.VisTable
  */
 class KeyboardShortcutsDialog : BaseDialog("Keyboard Shortcuts") {
 
+    private val keymapManager = Mundus.inject<KeymapManager>()
     private lateinit var root: VisTable
 
     init {
@@ -21,10 +26,10 @@ class KeyboardShortcutsDialog : BaseDialog("Keyboard Shortcuts") {
         val shortcutTableOne = VisTable()
         shortcutTableOne.defaults().pad(4f)
 
-        addShortcut("W", "Move Forward", shortcutTableOne)
-        addShortcut("S", "Move Back", shortcutTableOne)
-        addShortcut("A", "Strafe Left", shortcutTableOne)
-        addShortcut("D", "Strafe Right", shortcutTableOne)
+        addShortcut(keymapManager.getKey(KeymapKey.MOVE_FORWARD), "Move Forward", shortcutTableOne)
+        addShortcut(keymapManager.getKey(KeymapKey.MOVE_BACK), "Move Back", shortcutTableOne)
+        addShortcut(keymapManager.getKey(KeymapKey.STRAFE_LEFT), "Strafe Left", shortcutTableOne)
+        addShortcut(keymapManager.getKey(KeymapKey.STRAFE_RIGHT), "Strafe Right", shortcutTableOne)
         addShortcut("Q", "Move Up", shortcutTableOne)
         addShortcut("E", "Move Down", shortcutTableOne)
         addShortcut("Hold Middle Click", "Look Around", shortcutTableOne)
@@ -54,6 +59,13 @@ class KeyboardShortcutsDialog : BaseDialog("Keyboard Shortcuts") {
 
     private fun addShortcut(key: String, desc: String, table: VisTable) {
         table.add(key).left()
+        table.addSeparator(true)
+        table.add(desc).left().row()
+        table.addSeparator().colspan(3)
+    }
+
+    private fun addShortcut(keycode: Int, desc: String, table: VisTable) {
+        table.add(Input.Keys.toString(keycode)).left()
         table.addSeparator(true)
         table.add(desc).left().row()
         table.addSeparator().colspan(3)
